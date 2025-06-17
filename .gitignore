@@ -25,4 +25,4 @@ Thumbs.db
 
 # Project exclude paths
 /storage/app/
-/storage/framework/
+#/storage/framework/
