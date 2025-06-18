@@ -9,6 +9,7 @@ class My_favorite_book extends Model
 {
     /** @use HasFactory<\Database\Factories\MyFavoriteBooksFactory> */
     use HasFactory;
+    protected $fillable = ['book_id','user_id'];
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);

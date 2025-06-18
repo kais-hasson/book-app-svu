@@ -9,7 +9,7 @@ class My_book extends Model
 {
     /** @use HasFactory<\Database\Factories\MyBooksFactory> */
     use HasFactory;
-    protected $fillable = ['current_Page'];
+    protected $fillable = ['current_Page','book_id','user_id','isFinished'];
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);

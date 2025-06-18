@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\My_favorite_book;
-use App\Http\Requests\Storemy_favorite_booksRequest;
-use App\Http\Requests\Updatemy_favorite_booksRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class MyFavoriteBooksController extends Controller
 {
@@ -13,8 +13,12 @@ class MyFavoriteBooksController extends Controller
      */
     public function index()
     {
-        $my_favorite_books = My_favorite_book::all();
-        return Response()->json(["data" => $my_favorite_books, "status" => 200]);
+        $favoriteBooks = Auth::user()->favoriteBooks()->with('favoriteBooks')->get();
+
+        return response()->json([
+            'data' => $favoriteBooks,
+            'status' => 200,
+        ]);
     }
 
     /**
@@ -28,17 +32,31 @@ class MyFavoriteBooksController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Storemy_favorite_booksRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'book_id' => 'required|exists:books,id',
+        ]);
+
+        $favoriteBooks = Auth::user()->favoriteBooks()->create($validated);
+
+        return response()->json([
+            'data' => $favoriteBooks,
+            'status' => 201,
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(My_favorite_book $my_favorite_books)
+    public function show($id)
     {
-        //
+        $favoriteBooks = Auth::user()->favoriteBooks()->with('favoriteBooks')->findOrFail($id);
+
+        return response()->json([
+            'data' => $favoriteBooks,
+            'status' => 200,
+        ]);
     }
 
     /**

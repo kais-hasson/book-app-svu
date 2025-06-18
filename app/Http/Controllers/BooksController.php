@@ -10,24 +10,44 @@ class BooksController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::all();
-        return Response()->json(["data" => $books, "status" => 200]);
+        $query = Book::query();
+
+        // Optional filter by category
+        if ($request->has('category_book_id')) {
+            $query->where('category_book_id', $request->category_book_id);
+        }
+
+        // Optional filter by book ID
+        if ($request->has('book_id')) {
+            $query->where('id', $request->book_id);
+        }
+
+        // Eager load related category
+        $books = $query->with('category')->get();
+
+        return response()->json([
+            'data' => $books,
+            'status' => 200,
+        ]);
     }
 
     public function show($id)
     {
-        $book = Book::find($id);
+        $book = Book::with('category')->find($id);
 
-        if (!$book) {
+        if (! $book) {
             return response()->json([
                 'message' => 'Book not found.',
                 'code' => 404,
             ], 404);
         }
 
-        return response()->json($book);
+        return response()->json([
+            'data' => $book,
+            'status' => 200,
+        ]);
     }
     /**
      * Show the form for creating a new resource.

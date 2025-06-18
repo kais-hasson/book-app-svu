@@ -22,4 +22,7 @@ Route::get('/books', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
+Route::fallback(function () {
+    return redirect('/'); // or return view('home');
+});

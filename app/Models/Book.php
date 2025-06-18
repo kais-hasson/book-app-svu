@@ -19,9 +19,9 @@ class Book extends Model
     return $this->hasMany(My_book::class);
     }
 
-    public function my_favorite_books()
+    public function favorite_books()
     {
-        return $this->hasMany(My_favorite_book::class);
+        return $this->hasMany(favorate_books::class);
     }
 
 //    public function favoritedByUser()

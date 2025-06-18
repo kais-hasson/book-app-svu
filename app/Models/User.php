@@ -17,7 +17,7 @@ class User extends Authenticatable
 
     public function favoriteBooks(): User|\Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(My_favorite_book::class);
+        return $this->hasMany(favorate_books::class);
     }
 
     public function myBooks(): User|\Illuminate\Database\Eloquent\Relations\HasMany

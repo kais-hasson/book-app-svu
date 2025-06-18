@@ -1,12 +1,12 @@
 <x-layout>
 <x-slot:heading>
-    job listings
+    books listings
 </x-slot:heading>
-@foreach($jobs as $job)
+@foreach($books as $book)
 
     <li>
-        <a href="/jobs/{{$job['id']}}">
-            <strong>{{$job['title']}}:</strong>Pays<strong>{{$job['salary']}}</strong>
+        <a href="/book/{{$book['id']}}">
+            <strong>{{$book['title']}}:</strong>Pays<strong>{{$book['salary']}}</strong>
         </a>
 
     </li>
