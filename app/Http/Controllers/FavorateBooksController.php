@@ -14,7 +14,7 @@ class FavorateBooksController extends Controller
      */
     public function index()
     {
-        $favoriteBooks = Auth::user()->favoriteBooks()->with('favoriteBooks')->get();
+        $favoriteBooks = Auth::user()->favoriteBooks()->with('book')->get();
 
         return response()->json([
             'data' => $favoriteBooks,
@@ -44,7 +44,7 @@ class FavorateBooksController extends Controller
      */
     public function show($id)
     {
-        $favoriteBooks = Auth::user()->favoriteBooks()->with('favoriteBooks')->findOrFail($id);
+        $favoriteBooks = Auth::user()->favoriteBooks()->with('book')->findOrFail($id);
 
         return response()->json([
             'data' => $favoriteBooks,
