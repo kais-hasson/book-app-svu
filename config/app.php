@@ -53,7 +53,13 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'providers' => [
 
+         Laravel\Passport\PassportServiceProvider::class,
+
+//        App\Providers\CustomPassportServiceProvider::class, // ✅ use this one instead
+
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

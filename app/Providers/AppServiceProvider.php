@@ -34,9 +34,9 @@ class AppServiceProvider extends ServiceProvider
                 File::put($privateKey, base64_decode(env('PASSPORT_PRIVATE_KEY_B64')));
                 File::put($publicKey, base64_decode(env('PASSPORT_PUBLIC_KEY_B64')));
 
-                // 🔐 Set correct permissions (600 = owner can read/write)
-                chmod($privateKey, 0600);
-                chmod($publicKey, 0600);
+                // ✅ Set secure permissions
+                @chmod($privateKey, 0600);
+                @chmod($publicKey, 0600);
             }
         }
     }
