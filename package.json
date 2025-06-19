@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "postinstall": "chmod 660 storage/oauth-private.key storage/oauth-public.key",
         "start": "php artisan serve",
         "build": "vite build",
         "dev": "vite"
