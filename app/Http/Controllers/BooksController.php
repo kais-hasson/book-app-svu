@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category_book;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -25,10 +26,14 @@ class BooksController extends Controller
         }
 
         // Eager load related category
-        $books = $query->with('category')->get();
+        $books = $query->with('category')->orderBy('created_at', 'desc')->get();
 
         return response()->json([
-            'data' => $books,
+            'data' => [
+                'recommended'=>$books->where('rate',5),
+                'newBooks'=>$books->take(5),
+                'all'=>$books,
+            ],
             'status' => 200,
         ]);
     }
@@ -63,14 +68,14 @@ class BooksController extends Controller
     public function store(Request $request)
     {
        $fields= $request->validate([
-            'name'=> 'required',
-            'path'=> 'required',
-            'rate'=> 'required',
+            'name'=> 'required|string',
+            'path'=> 'required|string',
+            'rate'=> 'required|integer|min:1|max:5',
             'cover_Img'=> 'required',
-            'writer'=> 'required',
-            'category_book_id'=>'required',
+            'writer'=> 'required|string',
+            'category_book_id'=>'required|integer|exists:category_book,id',
             'description'=> 'required',
-            'status'=> 'required',
+            'language'=> 'required',
         ]);
        $book=Book::create($fields);
 //        $book = new Book();

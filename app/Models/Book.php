@@ -9,11 +9,11 @@ class Book extends Model
 {
     /** @use HasFactory<\Database\Factories\BooksFactory> */
     use HasFactory;
-    protected  $fillable = ['name','path','rate','cover_Img','category_book_id','writer','description','status'];
+    protected  $fillable = ['name','path','rate','cover_Img','category_book_id','writer','description','language'];
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-    return $this->belongsTo(Category_book::class);
+    return $this->belongsTo(Category_book::class,'category_book_id');
     }
     public function my_books(){
     return $this->hasMany(My_book::class);

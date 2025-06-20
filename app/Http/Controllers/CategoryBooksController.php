@@ -32,7 +32,7 @@ class CategoryBooksController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_Name' => 'required',
+            'category_Name' => 'required|string',
         ]);
         $catigories = new Category_book();
         $catigories->category_Name = $request->input('category_Name');

@@ -23,6 +23,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('books', \App\Http\Controllers\BooksController::class);
     Route::apiResource('myBooks', \App\Http\Controllers\MyBooksController::class);
     Route::apiResource('favoriteBooks', \App\Http\Controllers\FavorateBooksController::class);
+    Route::apiResource('roles', \App\Http\Controllers\RolesController::class);
 });
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();

@@ -24,8 +24,8 @@ return new class extends Migration
             $table->integer('rate');
             $table->string('cover_Img');
             $table->string('writer');
+            $table->string('language');
             $table->string('description');
-            $table->string('status');
             $table->timestamps();
         });
     }
