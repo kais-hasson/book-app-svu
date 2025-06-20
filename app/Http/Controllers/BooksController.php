@@ -73,7 +73,7 @@ class BooksController extends Controller
             'rate'=> 'required|integer|min:1|max:5',
             'cover_Img'=> 'required',
             'writer'=> 'required|string',
-            'category_book_id'=>'required|integer|exists:category_book,id',
+            'category_book_id'=>'required|integer|exists:category_books,id',
             'description'=> 'required',
             'language'=> 'required',
         ]);
