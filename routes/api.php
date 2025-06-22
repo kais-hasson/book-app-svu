@@ -25,12 +25,13 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('favoriteBooks', \App\Http\Controllers\FavorateBooksController::class);
     Route::apiResource('roles', \App\Http\Controllers\RolesController::class);
 });
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+//Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group(function () {
     Route::get('/profile', [AuthController::class, 'profile']);
+    Route::get('/Allprofiles', [AuthController::class, 'profiles']);
     // other protected routes here
 });
 // Protected route using Passport token

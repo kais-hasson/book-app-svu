@@ -19,7 +19,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(favorate_books::class);
     }
-    public function role(): Roles|\Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): User|\Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Roles::class);
+    }
+    public function role(): User|\Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Roles::class);
     }

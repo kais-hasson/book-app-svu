@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category_book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BooksController extends Controller
 {
@@ -69,7 +70,7 @@ class BooksController extends Controller
     {
        $fields= $request->validate([
             'name'=> 'required|string',
-            'path'=> 'required|string',
+            'pdf_file'=> 'required',
             'rate'=> 'required|integer|min:1|max:5',
             'cover_Img'=> 'required',
             'writer'=> 'required|string',
@@ -77,7 +78,22 @@ class BooksController extends Controller
             'description'=> 'required',
             'language'=> 'required',
         ]);
-       $book=Book::create($fields);
+        $pdfPath = $request->file('pdf_file')->store('books', 'public');
+        $imgPath = $request->file('cover_Img')->store('img', 'public');
+        $pdffullUrl = Storage::url($pdfPath); // returns: /storage/books/filename.pdf
+        $pdffullPath = asset($pdffullUrl); // returns: http://yourdomain.com/storage/books/filename.pdf
+        $imgfullUrl = Storage::url($imgPath); // returns: /storage/books/filename.pdf
+        $imgfullPath = asset($imgfullUrl); // returns: http://yourdomain.com/storage/books/filename.pdf
+       $book=Book::create([
+            'name' => $request->name,
+            'rate' => $request->rate,
+            'cover_Img' => $imgfullPath,
+            'category_book_id' => $request->category_book_id,
+            'description' => $request->description,
+            'writer' => $request->writer,
+            'language' => $request->language,
+            'path' => $pdffullPath, // like "books/myfile.pdf"
+        ]);
 //        $book = new Book();
 //        $book->name = $request->input('name');
 //        $book->path = $request->input('path');

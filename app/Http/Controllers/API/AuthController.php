@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\My_book;
+use App\Models\Roles;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +23,6 @@ class AuthController extends Controller
         }
 
         $token = Auth::user()->createToken('MyAppToken')->accessToken;
-
         return response()->json(['token' => $token]);
     }
 
@@ -29,7 +30,18 @@ class AuthController extends Controller
     {
         return response()->json(
             ['data' => [
-                'user' => Auth::user(),
+                'user' => User::with('role')->where('id',Auth::id()) ->get(),
+                'my_Books'=>Auth::user()->myBooks()->with('book')->get()->count(),
+                'my_finished_Books'=>Auth::user()->myBooks()->with('book')->where('isFinished',true)->get()->count(),
+
+            ],
+            ]);
+//            $request->user());
+    }  public function profiles(Request $request)
+    {
+        return response()->json(
+            ['data' => [
+                'user' => User::with('role') ->get(),
                 'my_Books'=>Auth::user()->myBooks()->with('book')->get()->count(),
                 'my_finished_Books'=>Auth::user()->myBooks()->with('book')->where('isFinished',true)->get()->count(),
 
