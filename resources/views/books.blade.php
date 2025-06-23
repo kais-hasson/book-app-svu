@@ -1,75 +1,79 @@
 
 <x-layout>
-<x-slot:heading>
-    books listings
-</x-slot:heading>
-@foreach($books as $book)
+    <x-slot:heading>
+        📚 Book Listings
+    </x-slot:heading>
 
-    <li>
-        <a href="/book/{{$book['id']}}">
-            <strong>{{$book['title']}}:</strong>Pays<strong>{{$book['salary']}}</strong>
-        </a>
+    <form id="bookForm" enctype="multipart/form-data" method="POST"
+          class="bg-white shadow-xl rounded-2xl p-6 w-full max-w-4xl mx-auto space-y-6">
+        @csrf
 
-    </li>
-@endforeach
-    <form id="bookForm" enctype="multipart/form-data" class="flex flex-col g-1 items-center justify-between w-[75%] m-1 p-1">
-        @csrf <!-- Still needed to allow CSRF token retrieval -->
-
-        <div class="flex justify-between g-3 w-full p-1 w-[50%]">
-            <div class="flex flex-col">
-                <label for="name">name:</label>
-                <input type="text" class="bg-[#F0F0F0] border- " name="name" id="name" required>
+        {{-- First Row --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="name" class="block font-semibold mb-1">Name:</label>
+                <input type="text" name="name" id="name" required
+                       class="w-full border rounded-md px-3 py-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#BAB49B]">
             </div>
-            <div class="flex flex-col ">
-        <label for="rate">rate:</label>
-        <input type="number" class="w-[50%]"  name="rate" id="rate" min="1" max="5" required>
+            <div>
+                <label for="rate" class="block font-semibold mb-1">Rate (1-5):</label>
+                <input type="number" name="rate" id="rate" min="1" max="5" required
+                       class="w-full border rounded-md px-3 py-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#BAB49B]">
             </div>
         </div>
 
-        <div class="flex justify-between g-3 w-full p-1">
-                <div class="flex flex-col">
-                    <label for="name">name:</label>
-                    <input class="w-[50%]"  type="text" name="name" id="name" required>
-                </div>
-                <div class="flex flex-col">
-                    <label for="rate">rate:</label>
-                    <input class="w-[50%]"  type="number" name="rate" id="rate" min="1" max="5" required>
-                </div>
+        {{-- Second Row --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="writer" class="block font-semibold mb-1">Writer:</label>
+                <input type="text" name="writer" id="writer" required
+                       class="w-full border rounded-md px-3 py-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#BAB49B]">
             </div>
-        <div class="flex justify-between g-3 w-full p-1">
-        <div class="flex flex-col">
-        <label for="cover_Img">cover_Img:</label>
-        <input class="w-[50%]"  type="file" name="cover_Img" id="cover_Img" required alt="">
-        </div>
-        <div class="flex flex-col">
-        <label for="description">description:</label>
-        <input class="w-[50%]"  type="text" name="description" id="description" required>
+            <div>
+                <label for="category_book_id" class="block font-semibold mb-1">Category Book ID:</label>
+                <input type="text" name="category_book_id" id="category_book_id" required
+                       class="w-full border rounded-md px-3 py-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#BAB49B]">
             </div>
         </div>
-        <div class="flex justify-between g-3 w-full p-1">
-            <div class="flex flex-col">
-        <label for="writer">writer:</label>
-        <input class="w-[50%]"  type="text" name="writer" id="writer" required>
+
+        {{-- Third Row --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="language" class="block font-semibold mb-1">Language:</label>
+                <input type="text" name="language" id="language" required
+                       class="w-full border rounded-md px-3 py-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#BAB49B]">
             </div>
-            <div class="flex flex-col">
-        <label for="category_book_id">category_book_id:</label>
-        <input class="w-[50%]"  type="text" name="category_book_id" id="category_book_id" required>
-            </div>
-        </div>
-        <div class="flex justify-between g-3 w-full p-1">
-        <div class="flex flex-col">
-        <label for="language">language:</label>
-        <input class="w-[50%]"  type="text" name="language" id="language" required>
-        </div>
-            <div class="flex flex-col">
-        <label for="pdf_file">Upload PDF:</label>
-                <input class="w-[50%]"  type="file" name="pdf_file" id="pdf_file"  accept="application/pdf" required>
+            <div>
+                <label for="description" class="block font-semibold mb-1">Description:</label>
+                <input type="text" name="description" id="description" required
+                       class="w-full border rounded-md px-3 py-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#BAB49B]">
             </div>
         </div>
-        <div>
-        <button type="submit">Submit</button>
+
+        {{-- Fourth Row --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="cover_Img" class="block font-semibold mb-1">Cover Image:</label>
+                <input type="file" name="cover_Img" id="cover_Img" required
+                       class="w-full border rounded-md px-3 py-2 bg-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            </div>
+            <div>
+                <label for="pdf_file" class="block font-semibold mb-1">Upload PDF:</label>
+                <input type="file" name="pdf_file" id="pdf_file" accept="application/pdf" required
+                       class="w-full border rounded-md px-3 py-2 bg-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            </div>
         </div>
-        <div id="response"></div>
+
+        {{-- Submit Button --}}
+        <div class="text-center pt-4">
+            <button type="submit"
+                    class="bg-[#BAB49B] text-white px-6 py-2 rounded-md text-lg hover:bg-[#D8D3BE] transition-all">
+                📤 Submit Book
+            </button>
+        </div>
+
+        <div id="response" class="text-center text-sm text-gray-500"></div>
     </form>
-    </x-layout>
+</x-layout>
+
 <script src="{{ asset('js/book.js') }}"></script>

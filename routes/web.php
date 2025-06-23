@@ -13,6 +13,10 @@ Route::get('/books', function () {
     $books = Book::all();
     return view('books',['books'=>$books]);
 });
+Route::get('/job', function () {
+    $books = Book::all();
+    return view('job',['books'=>$books]);
+});
 
 //Route::controller(\App\Http\Controllers\CategoryBooksController::class)->group(function () {
 //    Route::get('/category-books', 'index');
