@@ -28,10 +28,10 @@ class BooksController extends Controller
 
         // Eager load related category
         $books = $query->with('category')->orderBy('created_at', 'desc')->get();
-
+        $recommended=$books->where('rate',5);
         return response()->json([
             'data' => [
-                'recommended'=>$books->where('rate',5),
+                'recommended'=>[...$recommended],
                 'newBooks'=>$books->take(5),
                 'all'=>$books,
             ],

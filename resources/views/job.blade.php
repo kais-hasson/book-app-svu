@@ -1,9 +1,4 @@
-<x-layout>
-    <x-slot:heading>
-        📚 Book Listings
-    </x-slot:heading>
-
-    {{-- Book Cards --}}
+{{-- Book Cards --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-2">
         @foreach($books as $book)
             <a href="/book/{{ $book['id'] }}" class="bg-[#BAB49B] hover:bg-[#D8D3BE] p-3 rounded-t-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
@@ -23,4 +18,3 @@
             </a>
         @endforeach
     </div>
-</x-layout>

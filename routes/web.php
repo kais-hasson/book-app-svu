@@ -12,6 +12,9 @@ Route::get('/login', function () {
 Route::get('/books', function () {
     $books = Book::all();
     return view('books',['books'=>$books]);
+});Route::get('/category_books', function () {
+    $category_books = \App\Models\Category_book::all();
+    return view('category_books',['$category_books'=>$category_books]);
 });
 Route::get('/job', function () {
     $books = Book::all();
