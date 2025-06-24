@@ -81,9 +81,9 @@ class BooksController extends Controller
         $pdfPath = $request->file('pdf_file')->store('books', 'public');
         $imgPath = $request->file('cover_Img')->store('img', 'public');
         $pdffullUrl = Storage::url($pdfPath); // returns: /storage/books/filename.pdf
-        $pdffullPath = asset($pdffullUrl); // returns: http://yourdomain.com/storage/books/filename.pdf
+        $pdffullPath =  secure_asset($pdffullUrl); // returns: http://yourdomain.com/storage/books/filename.pdf
         $imgfullUrl = Storage::url($imgPath); // returns: /storage/books/filename.pdf
-        $imgfullPath = asset($imgfullUrl); // returns: http://yourdomain.com/storage/books/filename.pdf
+        $imgfullPath =  secure_asset($imgfullUrl); // returns: http://yourdomain.com/storage/books/filename.pdf
        $book=Book::create([
             'name' => $request->name,
             'rate' => $request->rate,
