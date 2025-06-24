@@ -49,8 +49,6 @@ Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logo
 //    Route::post('/category-books', 'store');
 //});
 
-Auth::routes();
-
 Route::post('/login',   [\App\Http\Controllers\API\AuthController::class, 'login'])->name('login');
 
 //    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
