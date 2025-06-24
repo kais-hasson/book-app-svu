@@ -20,5 +20,6 @@ class RolesSeeder extends Seeder
             ['role_name' => 'visitor'],
         ]);
 
+
     }
 }
