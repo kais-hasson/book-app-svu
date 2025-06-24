@@ -48,6 +48,18 @@ class AuthController extends Controller
             ],
             ]);
 //            $request->user());
+    } public function users(Request $request)
+    {
+        $userWithRole =
+
+               User::with('role') ->get();
+//            'my_Books'=>Auth::user()->myBooks()->with('book')->get()->count(),
+//            'my_finished_Books'=>Auth::user()->myBooks()->with('book')->where('isFinished',true)->get()->count(),
+
+
+        return view('users',['users'=>$userWithRole ]);
+
+//            $request->user());
     }
     public function register(Request $request)
     {
@@ -55,14 +67,13 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'role_id' => 'required|integer',
         ]);
 
         $user = \App\Models\User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role_id' => $request->role_id,
+            'role_id' => 1,
         ]);
 
         $token = $user->createToken('MyAppToken')->accessToken;

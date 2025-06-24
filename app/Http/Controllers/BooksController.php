@@ -40,7 +40,7 @@ class BooksController extends Controller
     }
 
     public function show($id)
-    {
+    {   dd('show');
         $book = Book::with('category')->find($id);
 
         if (! $book) {

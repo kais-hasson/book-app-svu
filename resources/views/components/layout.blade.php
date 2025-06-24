@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Books</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -36,21 +36,29 @@
               <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
               <x-nav-link href="/books" :active="request()->is('books')">books</x-nav-link>
               <x-nav-link href="/category_books" :active="request()->is('category_books')">Category Books</x-nav-link>
-              <x-nav-link href="/job" :active="request()->is('job')">Contact</x-nav-link>
+              <x-nav-link href="/roles" :active="request()->is('roles')">Roles</x-nav-link>
+              <x-nav-link href="/users" :active="request()->is('users')">Users</x-nav-link>
             </div>
           </div>
         </div>
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" >
+
+              <form id="logout-form" class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" >
                   @csrf
-                  <button type="submit" class="text-white">
+                  <button type="button" class="text-white" onclick="logout()">
                       <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                       </svg>
                   </button>
               </form>
-
+              <script>
+                  function logout() {
+                      console.log('logout');
+                      localStorage.removeItem('token');
+                      window.location.href = '/login'; // Or wherever your login is
+                  }
+              </script>
             <!-- Profile dropdown -->
             <div class="relative ml-3">
               <div>
@@ -99,6 +107,8 @@
           <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
           <x-nav-link href="/books" :active="request()->is('books')">books</x-nav-link>
           <x-nav-link href="/category_books" :active="request()->is('category_books')">Category Books</x-nav-link>
+          <x-nav-link href="/roles" :active="request()->is('roles')">Roles</x-nav-link>
+          <x-nav-link href="/users" :active="request()->is('users')">Users</x-nav-link>
       </div>
       <div class="border-t border-gray-700 pt-4 pb-3">
         <div class="flex items-center px-5">
@@ -124,10 +134,11 @@
   </nav>
   <header class="bg-white shadow-sm">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex justify-between">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{$heading}}</h1>
-        @if($buttonName||0)
-        <h4 class="text-xl font-bold tracking-tight text-gray-900">{{$buttonName}}</h4>
-        @endif
+        {{$heading}}
+{{--      <h1 class="text-3xl font-bold tracking-tight text-gray-900"></h1>--}}
+{{--        @if($buttonName||0)--}}
+{{--        <h4 class="text-xl font-bold tracking-tight text-gray-900">{{$buttonName}}</h4>--}}
+{{--        @endif--}}
     </div>
   </header>
   <main>
