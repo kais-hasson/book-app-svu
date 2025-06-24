@@ -10,7 +10,7 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('../auth/login');
 });
-Route::middleware('auth')->group(function () {
+
     Route::get('/get_category_books', function () {
         $categoryBooks = Category_book::all();
         return view('categoryBooks',['categoryBooks'=>$categoryBooks]);
@@ -26,7 +26,6 @@ Route::middleware('auth')->group(function () {
 
 
     });
-});
 
 
 //    Route::get('/books', function () {
