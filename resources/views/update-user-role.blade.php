@@ -12,10 +12,10 @@
                         <input type="text" name="id" id="id" required value="{{$user->id}}"
                                class="w-full border rounded-md px-3 py-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#BAB49B]">
                     </div>
-                    <label for="role_Id" class="block font-semibold mb-1">Role:</label>
-                    <select name="role_Id" required id="role_Id" class=" form-select w-full border rounded-md px-3 py-2 bg-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    <label for="code" class="block font-semibold mb-1">Role:</label>
+                    <select name="code" required id="code" class=" form-select w-full border rounded-md px-3 py-2 bg-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                         @foreach($roles as $role)
-                            <option value="{{$role['id']}}">{{$role['role_name']}}</option>
+                            <option value="{{$role['code']}}">{{$role['role_name']}}</option>
                         @endforeach
                     </select>
 

@@ -16,9 +16,9 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
-        echo $request->role_id;
-        if ($request->has('role_id')) {
-           return Roles::query()->find($request->role_id)->with('user')->get();
+        echo $request->code;
+        if ($request->has('code')) {
+           return Roles::query()->find($request->code)->with('user')->get();
         }
         return Roles::with('user')->get();
 //        return Auth::user()->with('role')->get();
@@ -31,9 +31,11 @@ class RolesController extends Controller
     {
         $request->validate([
             'role_name' => 'required',
+            'code' => 'required',
         ]);
         $roles = new Roles();
         $roles->role_name = $request->input('role_name');
+        $roles->code = $request->input('code');
         $roles->save();
         return Response()->json(["data" => $roles, "status" => 200]);
     }
@@ -41,9 +43,9 @@ class RolesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($code)
     {
-        $role = Roles::with('user')->find($id);
+        $role = Roles::with('user')->find($code,'code');
 
         if (! $role) {
             return response()->json([

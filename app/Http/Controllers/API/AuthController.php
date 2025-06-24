@@ -73,7 +73,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role_id' => 1,
+            'code' => 1,
         ]);
 
         $token = $user->createToken('MyAppToken')->accessToken;
@@ -87,11 +87,11 @@ class AuthController extends Controller
     {
        $fields= $request->validate([
             'id' => 'required',
-            'role_Id'=>'required'
+            'code'=>'required'
         ]);
         try {
             $user = User::findOrFail($fields['id']);
-            $user->role_id = $fields['role_Id'];
+            $user->code = $fields['code'];
             $user->save();
             return Response()->json([ 'message' => 'Role updated successfully',"data" => $user, "status" => 200]);
         }
