@@ -30,4 +30,4 @@
             </div>
         </form>
         </body>
-<script src="{{ asset('js/catregories.js') }}"></script>
+<script src="{{  secure_asset('js/catregories.js') }}"></script>

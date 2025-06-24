@@ -22,4 +22,4 @@
             @endforeach
         </div>
     </x-layout>
-<script src="{{ asset('js/book.js') }}"></script>
+<script src="{{  secure_asset('js/book.js') }}"></script>

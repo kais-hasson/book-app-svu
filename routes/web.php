@@ -10,7 +10,7 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('../auth/login');
 });
-
+Route::middleware('auth')->group(function () {
     Route::get('/get_category_books', function () {
         $categoryBooks = Category_book::all();
         return view('categoryBooks',['categoryBooks'=>$categoryBooks]);
@@ -19,7 +19,16 @@ Route::get('/login', function () {
         $books = Book::all();
         return view('books',['books'=>$books]);
     });
-Route::get('/get_users', [\App\Http\Controllers\API\AuthController::class, 'users']);
+    Route::get('/get_users', [\App\Http\Controllers\API\AuthController::class, 'users']);
+    Route::get('/get_roles', function () {
+        $roles= \App\Models\Roles::withCount('user')->get();;
+        return view('roles',['roles'=>$roles]);
+
+
+    });
+});
+
+
 //    Route::get('/books', function () {
 //        $books = Book::all();
 //
@@ -29,12 +38,7 @@ Route::get('/get_users', [\App\Http\Controllers\API\AuthController::class, 'user
 //    $users= \App\Models\User::('myBooks')->get();
 //    return view('users',['users'=>$users]);
 //});
-    Route::get('/get_roles', function () {
-        $roles= \App\Models\Roles::withCount('user')->get();;
-        return view('roles',['roles'=>$roles]);
 
-
-    });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Route::apiResource('category-books', \App\Http\Controllers\CategoryBooksController::class);

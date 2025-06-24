@@ -32,4 +32,4 @@
             </div>
         </form>
         </body>
-<script src="{{ asset('js/role.js') }}"></script>
+<script src="{{  secure_asset('js/role.js') }}"></script>
