@@ -11,15 +11,15 @@ Route::get('/login', function () {
     return view('../auth/login');
 });
 
-    Route::get('/category_books', function () {
+    Route::get('/get_category_books', function () {
         $categoryBooks = Category_book::all();
         return view('categoryBooks',['categoryBooks'=>$categoryBooks]);
     });
-    Route::get('/books', function () {
+    Route::get('/get_books', function () {
         $books = Book::all();
         return view('books',['books'=>$books]);
     });
-Route::get('/users', [\App\Http\Controllers\API\AuthController::class, 'users']);
+Route::get('/get_users', [\App\Http\Controllers\API\AuthController::class, 'users']);
 //    Route::get('/books', function () {
 //        $books = Book::all();
 //
@@ -29,7 +29,7 @@ Route::get('/users', [\App\Http\Controllers\API\AuthController::class, 'users'])
 //    $users= \App\Models\User::('myBooks')->get();
 //    return view('users',['users'=>$users]);
 //});
-    Route::get('/roles', function () {
+    Route::get('/get_roles', function () {
         $roles= \App\Models\Roles::withCount('user')->get();;
         return view('roles',['roles'=>$roles]);
 
@@ -37,11 +37,11 @@ Route::get('/users', [\App\Http\Controllers\API\AuthController::class, 'users'])
     });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Route::apiResource('category-books', \App\Http\Controllers\CategoryBooksController::class);
-//Route::apiResource('books', \App\Http\Controllers\BooksController::class);
-//Route::apiResource('myBooks', \App\Http\Controllers\MyBooksController::class);
-//Route::apiResource('favoriteBooks', \App\Http\Controllers\FavorateBooksController::class);
-//Route::apiResource('roles', \App\Http\Controllers\RolesController::class);
+Route::apiResource('category-books', \App\Http\Controllers\CategoryBooksController::class);
+Route::apiResource('books', \App\Http\Controllers\BooksController::class);
+Route::apiResource('myBooks', \App\Http\Controllers\MyBooksController::class);
+Route::apiResource('favoriteBooks', \App\Http\Controllers\FavorateBooksController::class);
+Route::apiResource('roles', \App\Http\Controllers\RolesController::class);
 
 Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 //Route::controller(\App\Http\Controllers\CategoryBooksController::class)->group(function () {

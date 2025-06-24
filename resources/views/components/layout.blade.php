@@ -34,10 +34,10 @@
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-              <x-nav-link href="/books" :active="request()->is('books')">books</x-nav-link>
-              <x-nav-link href="/category_books" :active="request()->is('category_books')">Category Books</x-nav-link>
-              <x-nav-link href="/roles" :active="request()->is('roles')">Roles</x-nav-link>
-              <x-nav-link href="/users" :active="request()->is('users')">Users</x-nav-link>
+              <x-nav-link href="/get_books" :active="request()->is('get_books')">books</x-nav-link>
+              <x-nav-link href="/get_category_books" :active="request()->is('get_category_books')">Category Books</x-nav-link>
+              <x-nav-link href="/get_roles" :active="request()->is('get_roles')">Roles</x-nav-link>
+              <x-nav-link href="/get_users" :active="request()->is('get_users')">Users</x-nav-link>
             </div>
           </div>
         </div>
@@ -105,10 +105,10 @@
       <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
           <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-          <x-nav-link href="/books" :active="request()->is('books')">books</x-nav-link>
-          <x-nav-link href="/category_books" :active="request()->is('category_books')">Category Books</x-nav-link>
-          <x-nav-link href="/roles" :active="request()->is('roles')">Roles</x-nav-link>
-          <x-nav-link href="/users" :active="request()->is('users')">Users</x-nav-link>
+          <x-nav-link href="/get_books" :active="request()->is('get_books')">books</x-nav-link>
+          <x-nav-link href="/get_category_books" :active="request()->is('get_category_books')">Category Books</x-nav-link>
+          <x-nav-link href="/get_roles" :active="request()->is('get_roles')">Roles</x-nav-link>
+          <x-nav-link href="/get_users" :active="request()->is('get_users')">Users</x-nav-link>
       </div>
       <div class="border-t border-gray-700 pt-4 pb-3">
         <div class="flex items-center px-5">
