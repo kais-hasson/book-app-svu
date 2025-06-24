@@ -37,7 +37,7 @@ Route::get('/users', [\App\Http\Controllers\API\AuthController::class, 'users'])
     });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::apiResource('category-books', \App\Http\Controllers\CategoryBooksController::class);
+//Route::apiResource('category-books', \App\Http\Controllers\CategoryBooksController::class);
 //Route::apiResource('books', \App\Http\Controllers\BooksController::class);
 Route::apiResource('myBooks', \App\Http\Controllers\MyBooksController::class);
 Route::apiResource('favoriteBooks', \App\Http\Controllers\FavorateBooksController::class);
