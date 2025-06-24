@@ -16,15 +16,17 @@ Route::get('/login', function () {
         return view('categoryBooks',['categoryBooks'=>$categoryBooks]);
     });
     Route::get('/get_books', function () {
+        $categories=Category_book::all();
         $books = Book::all();
-        return view('books',['books'=>$books]);
+        return view('books',['books'=>$books ,'categories'=>$categories]);
     });
     Route::get('/get_users', [\App\Http\Controllers\API\AuthController::class, 'users']);
     Route::get('/get_roles', function () {
         $roles= \App\Models\Roles::withCount('user')->get();;
         return view('roles',['roles'=>$roles]);
-
-
+    }); Route::get('/get_uers_roles', function () {
+        $roles= \App\Models\Roles::all();
+        return$roles;
     });
 
 

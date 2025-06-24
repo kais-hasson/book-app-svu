@@ -8,7 +8,7 @@ if(form) {
 
             const token = localStorage.getItem('token')
             try {
-                const response = await fetch('/api/changeRole', {
+                const response = await fetch('/api/change-role', {
                     method: 'POST',
                     body: formData,
                     headers: {

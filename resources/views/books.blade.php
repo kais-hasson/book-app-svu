@@ -34,7 +34,7 @@
 
     <div id="dialogModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
         <div class="bg-[#D8D3BE]  p-6 rounded-2xl shadow-lg max-w-[60rem] w-full">
-     @include('add-book')
+     @include('add-book',['categories'=>$categories])
 
         </div>
     </div>

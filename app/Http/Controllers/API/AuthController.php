@@ -55,9 +55,9 @@ class AuthController extends Controller
                User::with('role') ->get();
 //            'my_Books'=>Auth::user()->myBooks()->with('book')->get()->count(),
 //            'my_finished_Books'=>Auth::user()->myBooks()->with('book')->where('isFinished',true)->get()->count(),
+    $roles=Roles::all();
 
-
-        return view('users',['users'=>$userWithRole ]);
+        return view('users',['users'=>$userWithRole ,'roles'=>$roles ]);
 
 //            $request->user());
     }
@@ -82,6 +82,32 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token,
         ], 201);
+    }
+    public function updateUserRole(Request $request)
+    {
+       $fields= $request->validate([
+            'id' => 'required',
+            'role_Id'=>'required'
+        ]);
+        try {
+            $user = User::findOrFail($fields['id']);
+            $user->role_id = $fields['role_Id'];
+            $user->save();
+            return Response()->json([ 'message' => 'Role updated successfully',"data" => $user, "status" => 200]);
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to update role',
+                'error' => $e->getMessage(),
+                'status' => 500,
+            ], 500);}
+
+//        $user = \App\Models\User::update([
+//            'role_Id' => $request->role_Id,
+//        ]);
+
+//        $token = $user->createToken('MyAppToken')->accessToken;
+
     }
 
     public function logout(Request $request)

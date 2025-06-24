@@ -27,8 +27,11 @@
         </div>
         <div>
             <label for="category_book_id" class="block font-semibold mb-1">Category Book ID:</label>
-            <input type="text" name="category_book_id" id="category_book_id" required
-                   class="w-full border rounded-md px-3 py-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#BAB49B]">
+            <select name="category_book_id" required id="category_book_id" class=" form-select w-full border rounded-md px-3 py-2 bg-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                @foreach($categories as $category)
+                    <option value="{{$category['id']}}">{{$category['category_Name']}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 
