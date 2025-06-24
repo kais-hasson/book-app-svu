@@ -18,7 +18,7 @@ class RolesController extends Controller
     {
         echo $request->role_id;
         if ($request->has('role_id')) {
-           return Roles::query()->find($request->role_id)->with('user')->get();
+            return Roles::query()->find($request->role_id)->with('user')->get();
         }
         return Roles::with('user')->get();
 //        return Auth::user()->with('role')->get();

@@ -82,3 +82,4 @@
 </form>
 
 </body>
+<script src="{{  secure_asset('js/book.js') }}"></script>

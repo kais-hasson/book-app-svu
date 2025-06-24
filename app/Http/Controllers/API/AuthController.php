@@ -38,29 +38,29 @@ class AuthController extends Controller
             ]);
 //            $request->user());
     }  public function profiles(Request $request)
-    {
-        return response()->json(
-            ['data' => [
-                'user' => User::with('role') ->get(),
-                'my_Books'=>Auth::user()->myBooks()->with('book')->get()->count(),
-                'my_finished_Books'=>Auth::user()->myBooks()->with('book')->where('isFinished',true)->get()->count(),
+{
+    return response()->json(
+        ['data' => [
+            'user' => User::with('role') ->get(),
+            'my_Books'=>Auth::user()->myBooks()->with('book')->get()->count(),
+            'my_finished_Books'=>Auth::user()->myBooks()->with('book')->where('isFinished',true)->get()->count(),
 
-            ],
-            ]);
+        ],
+        ]);
 //            $request->user());
-    } public function users(Request $request)
-    {
-        $userWithRole =
+} public function users(Request $request)
+{
+    $userWithRole =
 
-               User::with('role') ->get();
+        User::with('role') ->get();
 //            'my_Books'=>Auth::user()->myBooks()->with('book')->get()->count(),
 //            'my_finished_Books'=>Auth::user()->myBooks()->with('book')->where('isFinished',true)->get()->count(),
     $roles=Roles::all();
 
-        return view('users',['users'=>$userWithRole ,'roles'=>$roles ]);
+    return view('users',['users'=>$userWithRole ,'roles'=>$roles ]);
 
 //            $request->user());
-    }
+}
     public function register(Request $request)
     {
         $request->validate([
@@ -85,7 +85,7 @@ class AuthController extends Controller
     }
     public function updateUserRole(Request $request)
     {
-       $fields= $request->validate([
+        $fields= $request->validate([
             'id' => 'required',
             'role_Id'=>'required'
         ]);
