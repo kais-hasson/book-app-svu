@@ -15,16 +15,16 @@ Route::get('/login', function () {
         $categoryBooks = Category_book::all();
         return view('categoryBooks',['categoryBooks'=>$categoryBooks]);
     });
-//    Route::get('/books', function () {
-//        $books = Book::all();
-//        return view('books',['books'=>$books]);
-//    });
-Route::get('/users', [\App\Http\Controllers\API\AuthController::class, 'users']);
     Route::get('/books', function () {
         $books = Book::all();
-
-
+        return view('books',['books'=>$books]);
     });
+Route::get('/users', [\App\Http\Controllers\API\AuthController::class, 'users']);
+//    Route::get('/books', function () {
+//        $books = Book::all();
+//
+//
+//    });
 //Route::get('/users', function () {
 //    $users= \App\Models\User::('myBooks')->get();
 //    return view('users',['users'=>$users]);
