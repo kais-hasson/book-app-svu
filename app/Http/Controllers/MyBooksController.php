@@ -40,11 +40,14 @@ class MyBooksController extends Controller
     {
         $validated = $request->validate([
             'book_id' => 'required|exists:books,id',
-            'current_Page' => 'nullable|integer',
-            'isFinished' => 'boolean',
         ]);
 
-        $myBook = Auth::user()->myBooks()->create($validated);
+
+        $myBook = Auth::user()->myBooks()->create([
+            'book_id' => $request->book_id,
+            'current_Page' =>0,
+            'isFinished' => 0,
+        ]);
 
         return response()->json([
             'data' => $myBook,
@@ -77,9 +80,25 @@ class MyBooksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatemy_booksRequest $request, My_book $my_books)
+    public function update(Request $request, $id)
     {
-        //
+
+        // Get only this user's book
+        $myBook = Auth::user()->myBooks()->findOrFail($id);
+        if ($request->has('current_Page')) {
+            $myBook->current_Page = $request->current_Page;
+        }
+
+        if ($request->has('isFinished')) {
+            $myBook->isFinished = $request->isFinished;
+        }
+        // Apply validated changes
+        $myBook->save();
+        return response()->json([
+            'data' => $myBook,
+            'message' => 'Book progress updated',
+            'status' => 200,
+        ]);
     }
 
     /**

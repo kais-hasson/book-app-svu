@@ -68,9 +68,10 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
+
        $fields= $request->validate([
             'name'=> 'required|string',
-            'pdf_file'=> 'required',
+            'path'=> 'required',
             'rate'=> 'required|integer|min:1|max:5',
             'cover_Img'=> 'required',
             'writer'=> 'required|string',
@@ -78,11 +79,11 @@ class BooksController extends Controller
             'description'=> 'required',
             'language'=> 'required',
         ]);
-        $pdfPath = $request->file('pdf_file')->store('books', 'public');
-        $imgPath = $request->file('cover_Img')->store('img', 'public');
-        $pdffullUrl = Storage::url($pdfPath); // returns: /storage/books/filename.pdf
+//        $pdfPath = $request->file('path')->store('books', 'public');
+//        $imgPath = $request->file('cover_Img')->store('img', 'public');
+        $pdffullUrl = Storage::url($request->path); // returns: /storage/books/filename.pdf
         $pdffullPath =  secure_asset($pdffullUrl); // returns: http://yourdomain.com/storage/books/filename.pdf
-        $imgfullUrl = Storage::url($imgPath); // returns: /storage/books/filename.pdf
+        $imgfullUrl = Storage::url($request->cover_Img); // returns: /storage/books/filename.pdf
         $imgfullPath =  secure_asset($imgfullUrl); // returns: http://yourdomain.com/storage/books/filename.pdf
        $book=Book::create([
             'name' => $request->name,

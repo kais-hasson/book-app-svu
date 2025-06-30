@@ -27,6 +27,7 @@ Route::middleware('auth:api')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('category-books', \App\Http\Controllers\CategoryBooksController::class);
     Route::apiResource('books', \App\Http\Controllers\BooksController::class);
+//    Route::put('/myBooks/{id}', [\App\Http\Controllers\MyBooksController::class, 'update']);
     Route::apiResource('myBooks', \App\Http\Controllers\MyBooksController::class);
     Route::apiResource('favoriteBooks', \App\Http\Controllers\FavorateBooksController::class);
     Route::apiResource('roles', \App\Http\Controllers\RolesController::class);

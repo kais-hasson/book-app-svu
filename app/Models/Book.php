@@ -15,6 +15,10 @@ class Book extends Model
     {
     return $this->belongsTo(Category_book::class,'category_book_id');
     }
+    public function categoryBook()
+    {
+        return $this->belongsTo(Category_book::class, 'category_book_id');
+    }
     public function my_books(){
     return $this->hasMany(My_book::class);
     }
@@ -23,7 +27,10 @@ class Book extends Model
     {
         return $this->hasMany(favorate_books::class);
     }
-
+    public function getPathUrlAttribute()
+    {
+        return \Storage::disk('public')->url($this->path_url);
+    }
 //    public function favoritedByUser()
 //    {
 //        return $this->belongsToMany(User::class, 'my_favorite_books');

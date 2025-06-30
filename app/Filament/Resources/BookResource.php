@@ -38,20 +38,24 @@ class BookResource extends Resource
                         TextInput::make('writer')->label('Writer')->required(),
                         Select::make('category_book_id')
                             ->label('Category')
-                            ->relationship('category_book', 'category_Name')
+                            ->relationship('categoryBook', 'category_Name')
+                            ->options(Category_book::all()->pluck('category_Name', 'id'))
                             ->searchable()
                             ->required(),
                         TextInput::make('language')->label('Language')->required(),
                         Textarea::make('description')->label('Description')->required(),
-                        FileUpload::make('cover_img')
-                            ->label('Cover Image')
-                            ->image()
-                            ->directory('book-covers')
-                            ->required(),
-                        FileUpload::make('pdf_file')
-                            ->label('Upload PDF')
+                        FileUpload::make('path')
+                            ->label('PDF')
+                            ->directory('books')
+                            ->disk('public')
                             ->acceptedFileTypes(['application/pdf'])
-                            ->directory('book-pdfs')
+                            ->required(),
+
+                        FileUpload::make('cover_Img')
+                            ->label('Cover')
+                            ->image()
+                            ->directory('img')
+                            ->disk('public')
                             ->required(),
                     ]),
             ]);

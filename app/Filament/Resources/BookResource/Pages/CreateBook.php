@@ -9,4 +9,11 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBook extends CreateRecord
 {
     protected static string $resource = BookResource::class;
+    protected function beforeSave(): void
+    {
+        if ($this->record) {
+            $this->record->path_url = \Storage::disk('public')->url($this->record->path_url);
+            $this->record->save();
+        }
+    }
 }
