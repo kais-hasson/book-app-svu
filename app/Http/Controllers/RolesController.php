@@ -30,10 +30,11 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'role_name' => 'required',
+            'name' => 'required',
         ]);
         $roles = new Roles();
-        $roles->role_name = $request->input('role_name');
+        $roles->name = $request->input('name');
+        $roles->guard_name = 'wep';
         $roles->save();
         return Response()->json(["data" => $roles, "status" => 200]);
     }

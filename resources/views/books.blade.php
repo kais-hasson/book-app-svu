@@ -13,7 +13,6 @@
 
     <body> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-2">
         @foreach($books as $book)
-            <a href="/book/{{ $book['id'] }}" class="bg-[#BAB49B] hover:bg-[#D8D3BE] p-3 rounded-t-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
                 @if(!empty($book['cover_Img']))
                     <img src="{{ asset($book['cover_Img']) }}" alt="{{ $book['name'] }}" class="w-full h-48 object-cover rounded-t-2xl">
                 @else
