@@ -41,6 +41,11 @@
         }
     },
     "scripts": {
+            "post-install-cmd": [
+                "@php artisan passport:keys --force",
+                "@chmod 600 storage/oauth-private.key",
+                "@chmod 600 storage/oauth-public.key"
+            ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
