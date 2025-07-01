@@ -23,10 +23,18 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
             ->id('admin')
             ->path('admin')
             ->login()
+            ->resources([
+                \App\Filament\Resources\BookResource::class,
+                \App\Filament\Resources\CategoryResource::class,
+                \App\Filament\Resources\UsersResource::class,
+                \App\Filament\Resources\RoleResource::class,
+            ])
+            ->passwordReset()      // Enables password reset routes (GET + POST)
+            ->registration()       // (Optional) Enables user registration
+            ->emailVerification()
             ->colors([
                 'primary' => Color::Amber,
             ])
