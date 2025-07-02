@@ -48,6 +48,17 @@ class BookResource extends Resource
                             ->image()
                             ->directory('book-covers')
                             ->required(),
+                        FileUpload::make('cover_img')
+                            ->label('Product Image')
+                            ->extraInputAttributes([
+                                'data-id' => 'cover_img',
+                                // 'data-url' => URL::signedRoute('livewire.upload-file', ['expires' => now()->addMinutes(30)])
+                            ])
+                            ->image()
+                            ->visibility('public')
+                            ->disk('public') // Ensure correct disk, i also using the 'public' one
+                            ->directory('book-covers')
+                            ->columnSpan('full'),
                         FileUpload::make('path')
                             ->label('Upload PDF')
                             ->acceptedFileTypes(['application/pdf'])
