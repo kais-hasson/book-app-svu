@@ -12,6 +12,16 @@ Route::post('/test-session', function () {
         'session' => session()->all(),
     ]);
 });
+Route::get('/debug-storage', function () {
+    return response()->json([
+        'symlink_exists' => file_exists(public_path('storage')),
+        'symlink_is_link' => is_link(public_path('storage')),
+        'symlink_target' => @readlink(public_path('storage')),
+        'books_files' => collect(\File::files(storage_path('app/public/books')))->map(function ($file) {
+            return $file->getFilename();
+        }),
+    ]);
+});
 Route::fallback(function () {
     return redirect('/admin'); // or return view('home');
 });
