@@ -15,7 +15,6 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
-use GuzzleHttp\Middleware;
 
 class BookResource extends Resource
 {
@@ -39,24 +38,20 @@ class BookResource extends Resource
                         TextInput::make('writer')->label('Writer')->required(),
                         Select::make('category_book_id')
                             ->label('Category')
-                            ->relationship('categoryBook', 'category_Name')
-                            ->options(Category_book::all()->pluck('category_Name', 'id'))
+                            ->relationship('category_book', 'category_Name')
                             ->searchable()
                             ->required(),
                         TextInput::make('language')->label('Language')->required(),
                         Textarea::make('description')->label('Description')->required(),
-                        FileUpload::make('path')
-                            ->label('PDF')
-                            ->directory('books')
-                            ->disk('public')
-                            ->acceptedFileTypes(['application/pdf'])
-                            ->required(),
-
-                        FileUpload::make('cover_Img')
-                            ->label('Cover')
+                        FileUpload::make('cover_img')
+                            ->label('Cover Image')
                             ->image()
-                            ->directory('img')
-                            ->disk('public')
+                            ->directory('book-covers')
+                            ->required(),
+                        FileUpload::make('path')
+                            ->label('Upload PDF')
+                            ->acceptedFileTypes(['application/pdf'])
+                            ->directory('book-pdfs')
                             ->required(),
                     ]),
             ]);
