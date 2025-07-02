@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 //use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
@@ -21,9 +22,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (\App::environment('production', 'development'))
         {
-            URL::forceScheme('https');
+            if ($this->app->environment('production')) {
+                $this->app['request']->server->set('HTTPS', 'on');
+
+                // Force https for URL generation
+                URL::forceScheme('https');
+            }
+
+            Schema::defaultStringLength(191);
         }
         $this->registerPolicies();
 
