@@ -15,6 +15,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
+use GuzzleHttp\Middleware;
 
 class BookResource extends Resource
 {
@@ -38,31 +39,24 @@ class BookResource extends Resource
                         TextInput::make('writer')->label('Writer')->required(),
                         Select::make('category_book_id')
                             ->label('Category')
-                            ->relationship('category_book', 'category_Name')
+                            ->relationship('categoryBook', 'category_Name')
+                            ->options(Category_book::all()->pluck('category_Name', 'id'))
                             ->searchable()
                             ->required(),
                         TextInput::make('language')->label('Language')->required(),
                         Textarea::make('description')->label('Description')->required(),
-                        FileUpload::make('cover_img')
-                            ->label('Cover Image')
-                            ->image()
-                            ->directory('book-covers')
-                            ->required(),
-                        FileUpload::make('cover_img')
-                            ->label('Product Image')
-                            ->extraInputAttributes([
-                                'data-id' => 'cover_img',
-                                // 'data-url' => URL::signedRoute('livewire.upload-file', ['expires' => now()->addMinutes(30)])
-                            ])
-                            ->image()
-                            ->visibility('public')
-                            ->disk('public') // Ensure correct disk, i also using the 'public' one
-                            ->directory('book-covers')
-                            ->columnSpan('full'),
                         FileUpload::make('path')
-                            ->label('Upload PDF')
+                            ->label('PDF')
+                            ->directory('books')
+                            ->disk('public')
                             ->acceptedFileTypes(['application/pdf'])
-                            ->directory('book-pdfs')
+                            ->required(),
+
+                        FileUpload::make('cover_Img')
+                            ->label('Cover')
+                            ->image()
+                            ->directory('img')
+                            ->disk('public')
                             ->required(),
                     ]),
             ]);
