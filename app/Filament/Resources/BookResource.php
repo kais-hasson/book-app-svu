@@ -15,6 +15,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
+use GuzzleHttp\Middleware;
 
 class BookResource extends Resource
 {
