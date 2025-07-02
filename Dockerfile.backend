@@ -39,3 +39,7 @@ EXPOSE 80
 
 # Start Apache in foreground
 CMD ["apache2-foreground"]
+location /storage {
+    alias /var/www/html/public/storage;
+    try_files $uri $uri/ =404;
+}

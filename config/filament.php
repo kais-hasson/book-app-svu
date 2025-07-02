@@ -40,7 +40,12 @@ return [
     | any of the disks defined in the `config/filesystems.php`.
     |
     */
-
+    'public' => [
+        'driver' => 'local',
+        'root' => storage_path('app/public'),
+        'url' => env('APP_URL') . '/storage',
+        'visibility' => 'public',
+    ],
     'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DISK', 'public'),
     'panel-providers' => [
         App\Providers\Filament\AdminPanelProvider::class,
