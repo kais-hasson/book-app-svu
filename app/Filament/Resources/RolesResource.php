@@ -29,6 +29,7 @@ class RolesResource extends Resource
                 Grid::make(1)
                     ->schema([
                         TextInput::make('name')->label('Name')->required(),
+                        TextInput::make('guard_name')->label('Guard Name')->required(),
                     ]),
             ]);
     }
@@ -38,6 +39,8 @@ class RolesResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('guard_name')->sortable()->searchable(),
+                TextColumn::make('id')->sortable()->searchable(),
             ])
             ->filters([
                 //
