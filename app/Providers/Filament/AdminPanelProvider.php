@@ -30,18 +30,33 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Resources\BookResource::class,
                 \App\Filament\Resources\CategoryResource::class,
                 \App\Filament\Resources\UsersResource::class,
-                \App\Filament\Resources\RoleResource::class,
+                \App\Filament\Resources\ChnageUereRoleResource::class,
             ])
             ->passwordReset()      // Enables password reset routes (GET + POST)
             ->registration()       // (Optional) Enables user registration
             ->emailVerification()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => [
+                    50  => '249, 247, 241',
+                    100 => '243, 239, 226',
+                    200 => '234, 227, 202',
+                    300 => '220, 208, 169',
+                    400 => '204, 188, 138',
+                    500 => '186, 180, 155', // Original #BAB49B
+                    600 => '158, 151, 126',
+                    700 => '132, 124, 101',
+                    800 => '106, 99, 79',
+                    900 => '83, 78, 62',
+                    950 => '52, 48, 37',
+                ]
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-//                Pages\Dashboard::class,
+                Pages\Dashboard::class,
+                Pages\Book::class,
+                Pages\Dashboard::class,
+                Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([

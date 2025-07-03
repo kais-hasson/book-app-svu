@@ -13,7 +13,7 @@ class RolesPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->role_id === 1;
     }
 
     /**
@@ -21,7 +21,7 @@ class RolesPolicy
      */
     public function view(User $user, roles $roles): bool
     {
-        return false;
+        return $user->role_id === 1;
     }
 
     /**
@@ -37,7 +37,7 @@ class RolesPolicy
      */
     public function update(User $user, roles $roles): bool
     {
-        return false;
+        return $user->role_id === 1;
     }
 
     /**
@@ -45,7 +45,7 @@ class RolesPolicy
      */
     public function delete(User $user, roles $roles): bool
     {
-        return false;
+        return $user->role_id === 1;
     }
 
     /**
@@ -53,7 +53,7 @@ class RolesPolicy
      */
     public function restore(User $user, roles $roles): bool
     {
-        return false;
+        return $user->role_id === 1;
     }
 
     /**
@@ -61,6 +61,6 @@ class RolesPolicy
      */
     public function forceDelete(User $user, roles $roles): bool
     {
-        return false;
+        return $user->role_id === 1;
     }
 }

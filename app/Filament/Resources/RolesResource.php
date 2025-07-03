@@ -37,7 +37,7 @@ class RolesResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nme')->sortable()->searchable(),
+                TextColumn::make('name')->sortable()->searchable(),
             ])
             ->filters([
                 //

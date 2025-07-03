@@ -4,8 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UsersResource\Pages;
 use App\Filament\Resources\UsersResource\RelationManagers;
+use App\Models\Category_book;
+use App\Models\Roles;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,7 +29,15 @@ class UsersResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Grid::make(1)
+                    ->schema([
+                        Select::make('role_id')
+                            ->label('Role')
+                            ->relationship('role', 'name')
+                            ->options(Roles::all()->pluck('name', 'id'))
+                            ->searchable()
+                            ->required(),
+                    ]),
             ]);
     }
 
@@ -33,6 +46,8 @@ class UsersResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('role_id')->sortable()->searchable(),
+                TextColumn::make('role.name')->sortable()->searchable(),
             ])
             ->filters([
                 //
@@ -58,12 +73,11 @@ class UsersResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUsers::route('/create'),
             'edit' => Pages\EditUsers::route('/{record}/edit'),
         ];
     }
-    public static function shouldRegisterNavigation(): bool
-    {
-        return (auth()->user()?->role_id===1);
-    }
+//    public static function shouldRegisterNavigation(): bool
+//    {
+//        return (auth()->user()?->role_id===1);
+//    }
 }
