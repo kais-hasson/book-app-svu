@@ -22,6 +22,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::get('/Allprofiles', [AuthController::class, 'profiles']);
     Route::post('/change-role', [AuthController::class, 'updateUserRole']);
+    Route::get('/finished', [\App\Http\Controllers\MyBooksController::class, 'finishedBooks']);
     // other protected routes here
 });
 Route::middleware('auth:api')->group(function () {
@@ -31,6 +32,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('myBooks', \App\Http\Controllers\MyBooksController::class);
     Route::apiResource('favoriteBooks', \App\Http\Controllers\FavorateBooksController::class);
     Route::apiResource('roles', \App\Http\Controllers\RolesController::class);
+
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

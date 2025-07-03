@@ -24,6 +24,16 @@ class MyBooksController extends Controller
             'status' => 200,
         ]);
     }
+    public function finishedBooks()
+    {
+        $myBooks = Auth::user()->myBooks()->where('isFinished',true)->with('book')->get();
+
+        return response()->json([
+            'data' => $myBooks,
+            'status' => 200,
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
