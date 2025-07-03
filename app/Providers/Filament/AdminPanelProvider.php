@@ -30,7 +30,8 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Resources\BookResource::class,
                 \App\Filament\Resources\CategoryResource::class,
                 \App\Filament\Resources\UsersResource::class,
-                \App\Filament\Resources\ChnageUereRoleResource::class,
+                \App\Filament\Resources\RolesResource::class,
+
             ])
             ->passwordReset()      // Enables password reset routes (GET + POST)
             ->registration()       // (Optional) Enables user registration
