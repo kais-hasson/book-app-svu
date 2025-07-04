@@ -16,6 +16,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
 use GuzzleHttp\Middleware;
+use Illuminate\Database\Eloquent\Model;
 
 class BookResource extends Resource
 {
@@ -97,7 +98,15 @@ class BookResource extends Resource
             'edit' => Pages\EditBook::route('/{record}/edit'),
         ];
     }
-    public static function shouldRegisterNavigation(): bool
+    public static function canCreate(): bool
+    {
+        return (auth()->user()?->role_id!==3);
+    }
+    public static function canDelete(Model $record): bool
+    {
+        return (auth()->user()?->role_id===1);
+    }
+    public static function canEdit(Model $record): bool
     {
         return (auth()->user()?->role_id===1);
     }
