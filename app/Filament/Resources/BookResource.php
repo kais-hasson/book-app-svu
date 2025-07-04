@@ -47,6 +47,7 @@ class BookResource extends Resource
                         TextInput::make('language')->label('Language')->required(),
                         Textarea::make('description')->label('Description')->required(),
                         FileUpload::make('path')
+                            ->maxSize(20480)
                             ->label('PDF')
                             ->directory('books')
                             ->disk('public')
@@ -55,6 +56,7 @@ class BookResource extends Resource
 
                         FileUpload::make('cover_Img')
                             ->label('Cover')
+                            ->maxSize(2048)
                             ->image()
                             ->directory('img')
                             ->disk('public')
