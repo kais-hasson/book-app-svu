@@ -20,9 +20,9 @@ class User extends Authenticatable implements FilamentUser
 //         Allow only users with role "super-admin"
 //        return true;
 //        $user->role->name;
-        return in_array($this->role_id, [1, 2]);
-    }
+        return in_array($this->role_id, [1, 2,3]);
 
+    }
     public function favoriteBooks(): User|\Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(favorate_books::class);

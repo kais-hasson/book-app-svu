@@ -50,6 +50,10 @@ return [
     'panel-providers' => [
         App\Providers\Filament\AdminPanelProvider::class,
     ],
+    'brand' => [
+        'name' => env('APP_NAME', 'Laravel'),
+        'logo' => '/images/book-land-logo.svg',
+    ],
     /*
     |--------------------------------------------------------------------------
     | Assets Path

@@ -97,4 +97,8 @@ class BookResource extends Resource
             'edit' => Pages\EditBook::route('/{record}/edit'),
         ];
     }
+    public static function shouldRegisterNavigation(): bool
+    {
+        return (auth()->user()?->role_id===1);
+    }
 }

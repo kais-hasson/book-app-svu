@@ -76,8 +76,12 @@ class UsersResource extends Resource
             'edit' => Pages\EditUsers::route('/{record}/edit'),
         ];
     }
-//    public static function shouldRegisterNavigation(): bool
-//    {
-//        return (auth()->user()?->role_id===1);
-//    }
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+    public static function shouldRegisterNavigation(): bool
+    {
+        return (auth()->user()?->role_id===1);
+    }
 }
