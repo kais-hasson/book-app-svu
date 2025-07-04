@@ -46,6 +46,9 @@
                 "@php artisan passport:keys --force",
                 "@chmod 600 storage/oauth-private.key",
                 "@chmod 600 storage/oauth-public.key",
+                "@php artisan migrate:fresh ",
+                "@php artisan db:seed --class=RolesSeeder",
+                "@php artisan passport:client --personal",
                 "@php artisan storage:link"
             ],
         "post-autoload-dump": [
