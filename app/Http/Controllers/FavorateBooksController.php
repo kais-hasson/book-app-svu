@@ -31,12 +31,31 @@ class FavorateBooksController extends Controller
             'book_id' => 'required|exists:books,id',
         ]);
 
-        $favoriteBooks = Auth::user()->favoriteBooks()->create($validated);
+        $user = Auth::user();
 
-        return response()->json([
-            'data' => $favoriteBooks,
-            'status' => 201,
-        ]);
+        // Check if the book is already in favorites
+        $existing = $user->favoriteBooks()->where('book_id', $validated['book_id'])->first();
+
+        if ($existing) {
+            // If exists, remove it (toggle off)
+            $existing->delete();
+
+            return response()->json([
+                'message' => 'Book removed from favorites.',
+                'status' => 200,
+            ]);
+        } else {
+            // If not exists, add it (toggle on)
+            $favorite = $user->favoriteBooks()->create([
+                'book_id' => $validated['book_id'],
+            ]);
+
+            return response()->json([
+                'message' => 'Book added to favorites.',
+                'data' => $favorite->with('book')->first(),
+                'status' => 201,
+            ]);
+        }
     }
 
     /**
